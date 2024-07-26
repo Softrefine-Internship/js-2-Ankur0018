@@ -5,11 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        font-size: 1.6rem;
+        font-family: sans-serif;
+        font-weight: 500;
+        color: #777;
+        height: 100vh;
+        position: relative;
+      }
+
+      ul {
+        list-style: none;
+      }
+      .pagination__container {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .pagination__btn {
+        font-size: inherit;
+        color: inherit;
+        padding: 1rem 1.5rem;
+        background: none;
+        border: 1px solid #ccc;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .pagination__btn:hover {
+        color: rgb(17, 114, 235);
+        background-color: rgb(233, 245, 254);
+      }
+      .pagination__btn:focus {
+        outline: none;
+      }
+      .pagination__btn--prev {
+        border-radius: 1rem 0 0 1rem;
+        border-right: none;
+      }
+      .pagination__btn--next {
+        border-radius: 0 1rem 1rem 0;
+      }
+      .pagination__list {
+        display: flex;
+        align-items: center;
+      }
+      .pagination__item {
+        border: 1px solid #ccc;
+        border-right: none;
+      }
+      .pagination__link:link,
+      .pagination__link:visited {
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: inherit;
+        display: inline-block;
+        transition: all 0.2s;
+      }
+      .pagination__link:hover,
+      .pagination__link:active {
+        color: rgb(17, 114, 235);
+        background-color: rgb(233, 245, 254);
+      }
+      .pagination__link.active {
+        color: rgb(17, 114, 235);
+        background-color: rgb(233, 245, 254);
+      }
+      .pagination__link:focus {
+        outline: none;
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div class="pagination__container">
+      <button class="pagination__btn pagination__btn--prev">Previous</button>
+      <ul class="pagination__list">
+        <li class="pagination__item">
+          <a href="#" class="pagination__link active">1</a>
+        </li>
+        <li class="pagination__item">
+          <a href="#" class="pagination__link">2</a>
+        </li>
+        <li class="pagination__item">
+          <a href="#" class="pagination__link">3</a>
+        </li>
+        <li class="pagination__item">
+          <a href="#" class="pagination__link">4</a>
+        </li>
+        <li class="pagination__item">
+          <a href="#" class="pagination__link">5</a>
+        </li>
+      </ul>
+      <button class="pagination__btn pagination__btn--next">Next</button>
+    </div>
+  </body>
   <script>
-    // write javascript here
+    let activePage = 0;
+    const pageNo = document.querySelectorAll(".pagination__link");
+    const nextButton = document.querySelector(".pagination__btn--next");
+    const prevButton = document.querySelector(".pagination__btn--prev");
+
+    function moveToNextPage() {
+      if (activePage < pageNo.length - 1) {
+        activePage++;
+        updateActivePage();
+      }
+    }
+
+    function moveToPrevPage() {
+      if (activePage > 0) {
+        activePage--;
+        updateActivePage();
+      }
+    }
+
+    function handlePageClick(event) {
+      const clickedPage = event.target;
+      activePage = Array.from(pageNo).indexOf(clickedPage);
+      updateActivePage();
+    }
+
+    function updateActivePage() {
+      pageNo.forEach((page, index) => {
+        page.classList.toggle("active", index === activePage);
+      });
+      console.log(`Active page: ${activePage + 1}`);
+    }
+
+    nextButton.addEventListener("click", moveToNextPage);
+    prevButton.addEventListener("click", moveToPrevPage);
+
+    pageNo.forEach((page) => {
+      page.addEventListener("click", handlePageClick);
+    });
   </script>
 </html>

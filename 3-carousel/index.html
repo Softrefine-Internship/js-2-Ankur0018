@@ -3,13 +3,182 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>Carousel</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .carousel .carousel__item {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .carousel .carousel__item img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        position: relative;
+      }
+
+      .carousel .carousel__item,
+      .carousel.carousel__item--hidden {
+        display: none;
+      }
+
+      .carousel__item.carousel__item--visible {
+        display: block;
+      }
+
+      .carousel__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+
+        height: 4rem;
+        width: 4rem;
+        cursor: pointer;
+        transform: translateY(-50%);
+        background-color: #737a85;
+        border-radius: 50%;
+      }
+
+      .carousel__button:hover {
+        border: 4px solid rgb(204, 204, 204);
+      }
+
+      .carousel__button-left {
+        left: 2%;
+      }
+
+      .carousel__button-right {
+        right: 2%;
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        height: 2.5rem;
+        width: 2.5rem;
+        cursor: pointer;
+        transform: translateY(-50%);
+        color: rgb(204, 204, 204);
+        background-color: #737a85;
+        border-radius: 50%;
+      }
+
+      .carousel__dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .carousel__dot {
+        height: 1rem;
+        width: 1rem;
+        background-color: rgb(204, 204, 204);
+        border-radius: 50%;
+        margin: 0 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        transform: translateY(-5rem);
+      }
+
+      .carousel__dot.active {
+        background-color: rgba(204, 204, 204, 0.3);
+        border: 2px solid rgb(204, 204, 204);
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div class="carousel">
+      <div class="carousel__item carousel__item--visible">
+        <img src="Images/img-1.jpg" alt="" />
+      </div>
+      <div class="carousel__item"><img src="Images/img-2.jpg" alt="" /></div>
+      <div class="carousel__item"><img src="Images/img-3.jpg" alt="" /></div>
+      <div class="carousel__item"><img src="Images/img-4.jpg" alt="" /></div>
+      <div class="carousel__item"><img src="Images/img-5.jpg" alt="" /></div>
+
+      <div class="carousel__actions">
+        <div class="carousel__button carousel__button-left">
+          <ion-icon
+            name="chevron-back-outline"
+            class="icon carousel__button--prev"
+          ></ion-icon>
+        </div>
+        <div class="carousel__button carousel__button-right">
+          <ion-icon
+            name="chevron-forward-outline"
+            class="icon carousel__button--next"
+          ></ion-icon>
+        </div>
+      </div>
+
+      <div class="carousel__dots">
+        <span class="carousel__dot"></span>
+        <span class="carousel__dot"></span>
+        <span class="carousel__dot"></span>
+        <span class="carousel__dot"></span>
+        <span class="carousel__dot"></span>
+      </div>
+    </div>
+  </body>
   <script>
-    // write javascript here
+    //2nd approach
+
+    let slidePosition = 0;
+    const slides = document.getElementsByClassName("carousel__item");
+    const totalSlides = slides.length;
+    const nextButton = document.querySelector(".carousel__button-right");
+    const prevButton = document.querySelector(".carousel__button-left");
+    const dots = document.querySelectorAll(".carousel__dot");
+    nextButton.addEventListener("click", moveToNextSlide);
+    prevButton.addEventListener("click", moveToPrevSlide);
+    function updateSlideAction() {
+      for (let slide of slides) {
+        slide.classList.remove("carousel__item--visible");
+        slide.classList.add("carousel__item--hidden");
+      }
+      slides[slidePosition].classList.add("carousel__item--visible");
+      for (let dot of dots) {
+        dot.classList.remove("active");
+      }
+      dots[slidePosition].classList.add("active");
+    }
+    function moveToNextSlide() {
+      if (slidePosition === totalSlides - 1) {
+        slidePosition = 0;
+      } else slidePosition++;
+      updateSlideAction();
+    }
+    function moveToPrevSlide() {
+      if (slidePosition === 0) {
+        slidePosition = totalSlides - 1;
+      } else slidePosition--;
+      updateSlideAction();
+    }
+    updateSlideAction();
   </script>
 </html>

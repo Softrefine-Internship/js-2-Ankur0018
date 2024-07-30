@@ -95,10 +95,32 @@
         .nav-list {
           gap: 3.2rem;
         }
+
+        .btn-nav-mobile:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+        }
+
+        .menu-mobile-nav::before {
+          top: -0.8rem;
+        }
+        .menu-mobile-nav::after {
+          top: 0.8rem;
+        }
       }
       @media only screen and (max-width: 50em) {
         html {
           font-size: 50%;
+        }
+
+        .btn-nav-mobile:hover {
+          outline: none;
+          box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+        }
+
+        .btn-nav-mobile:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
         }
 
         .nav {
@@ -162,11 +184,11 @@
           background-color: rgba(255, 255, 255);
         }
         .nav-open .menu-mobile-nav::before {
-          top: 0;
+          top: 0.7rem;
           transform: rotate(135deg);
         }
         .nav-open .menu-mobile-nav::after {
-          bottom: 0;
+          bottom: 0.7rem;
           transform: rotate(-135deg);
         }
 

@@ -3,9 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <title>Accordian</title>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>Accordion</title>
     <style>
       * {
         margin: 0;
@@ -18,56 +24,52 @@
         font-family: sans-serif;
       }
 
-      .hidden{
+      .hidden {
         display: none;
       }
 
       /* Font-styles */
-
-      a{
+      a {
         text-decoration: none;
         color: #d44d4e;
       }
 
-
-      .accordian--header-text{
-        font-size: 1.6rem;
+      .accordion--header-text {
+        font-size: 1.8rem;
       }
 
-      .accordian--body{
-        font-size: 1.4rem;
+      .accordion--body {
+        font-size: 1.6rem;
         display: none;
       }
 
-      .accordian--body.active{
+      .accordion--body.active {
         display: block;
       }
 
-      .accordian--header-text.active{
+      .accordion--header-text.active {
         color: #4f79c9;
       }
 
       /* Icon-styles */
-
-      .accordian--header-icon{
+      .accordion--header-icon {
         font-size: 2.2rem;
       }
 
-      .arrow-icon.active{
+      .arrow-icon.active {
         color: #4f79c9;
         transform: rotate(180deg);
       }
 
       /* Layout */
-      .container{
+      .container {
         width: 95%;
         margin: 2rem auto;
-        border: 1px solid  rgb(27, 27, 27, 0.2);
+        border: 1px solid rgb(27, 27, 27, 0.2);
         border-radius: 0.5rem;
-        
       }
 
-      .accordian--header{
+      .accordion--header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -75,19 +77,41 @@
         cursor: pointer;
       }
 
-      .accordian--body{
+      .accordion--body {
         padding: 1rem 2rem;
+      }
+
+      .accordion:not(:last-child) {
+        border-bottom: 1px solid rgb(27, 27, 27, 0.2);
+      }
+
+      .accordion--body {
+        border-top: 1px solid rgb(27, 27, 27, 0.2);
+      }
+
+      @media only screen and (max-width: 50em) {
+        html {
+          font-size: 56%;
+        }
+      }
+
+      @media only screen and (max-width: 30em) {
+        html {
+          font-size: 50%;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="accordian">
-        <div class="accordian--header">
-          <div class="accordian--header-text">Accordian Item #1</div>
-          <div class="accordian--header-icon"><ion-icon name="chevron-down-outline" class="arrow-icon active"></ion-icon></div>
-      </div>
-        <div class="accordian--body">
+      <div class="accordion">
+        <div class="accordion--header">
+          <div class="accordion--header-text">Accordion Item #1</div>
+          <div class="accordion--header-icon">
+            <ion-icon name="chevron-down-outline" class="arrow-icon"></ion-icon>
+          </div>
+        </div>
+        <div class="accordion--body">
           <strong>This is the first item's accordion body.</strong> It is shown
           by default, until the collapse plugin adds the appropriate classes
           that we use to style each element. These classes control the overall
@@ -97,50 +121,64 @@
           within the <a href="#">.accordion-body</a>, though the transition does
           limit overflow.
         </div>
+      </div>
 
-        <div class="accordian">
-          <div class="accordian--header">
-            <div class="accordian--header-text">Accordian Item #2</div>
-            <div class="accordian--header-icon"><ion-icon name="chevron-down-outline" class="arrow-icon"></ion-icon></div>
+      <div class="accordion">
+        <div class="accordion--header">
+          <div class="accordion--header-text">Accordion Item #2</div>
+          <div class="accordion--header-icon">
+            <ion-icon name="chevron-down-outline" class="arrow-icon"></ion-icon>
+          </div>
         </div>
-          <div class="accordian--body">
-            <strong>This is the second item's accordion body.</strong> It is shown
-            by default, until the collapse plugin adds the appropriate classes
-            that we use to style each element. These classes control the overall
-            appearance, as well as the showing and hiding via CSS transitions. You
-            can modify any of this with custom CSS or overriding our default
-            variables. It's also worth noting that just about any HTML can go
-            within the <a href="#">.accordion-body</a>, though the transition does
-            limit overflow.
-          </div>
+        <div class="accordion--body">
+          <strong>This is the second item's accordion body.</strong> It is shown
+          by default, until the collapse plugin adds the appropriate classes
+          that we use to style each element. These classes control the overall
+          appearance, as well as the showing and hiding via CSS transitions. You
+          can modify any of this with custom CSS or overriding our default
+          variables. It's also worth noting that just about any HTML can go
+          within the <a href="#">.accordion-body</a>, though the transition does
+          limit overflow.
+        </div>
+      </div>
 
-          <div class="accordian">
-            <div class="accordian--header">
-              <div class="accordian--header-text">Accordian Item #3</div>
-              <div class="accordian--header-icon"><ion-icon name="chevron-down-outline" class="arrow-icon"></ion-icon></div>
+      <div class="accordion">
+        <div class="accordion--header">
+          <div class="accordion--header-text">Accordion Item #3</div>
+          <div class="accordion--header-icon">
+            <ion-icon name="chevron-down-outline" class="arrow-icon"></ion-icon>
           </div>
-            <div class="accordian--body">
-              <strong>This is the third item's accordion body.</strong> It is shown
-              by default, until the collapse plugin adds the appropriate classes
-              that we use to style each element. These classes control the overall
-              appearance, as well as the showing and hiding via CSS transitions. You
-              can modify any of this with custom CSS or overriding our default
-              variables. It's also worth noting that just about any HTML can go
-              within the <a href="#">.accordion-body</a>, though the transition does
-              limit overflow.
-            </div>
+        </div>
+        <div class="accordion--body">
+          <strong>This is the third item's accordion body.</strong> It is shown
+          by default, until the collapse plugin adds the appropriate classes
+          that we use to style each element. These classes control the overall
+          appearance, as well as the showing and hiding via CSS transitions. You
+          can modify any of this with custom CSS or overriding our default
+          variables. It's also worth noting that just about any HTML can go
+          within the <a href="#">.accordion-body</a>, though the transition does
+          limit overflow.
+        </div>
       </div>
     </div>
-  </body>
-  <script>
-    const accordianItems = document.querySelectorAll(".accordian");
-const accordianHeaders = document.querySelectorAll(".accordian--header");
 
-for (let i = 0; i < accardianItems.length; i++) {
-  const accordianItem = accordianItems[i];
-  accordianHeaders[i].addEventListener("click", function () {
-    accordianItem.classList.toggle("active");
-  });
-}
-  </script>
+    <script>
+      const accordionHeaders = document.querySelectorAll(".accordion--header");
+
+      function handleAccordionClick(event) {
+        const header = event.currentTarget;
+        const accordion = header.parentElement;
+
+        header.querySelector(".arrow-icon").classList.toggle("active");
+        header
+          .querySelector(".accordion--header-text")
+          .classList.toggle("active");
+        accordion.querySelector(".accordion--body").classList.toggle("active");
+      }
+
+      accordionHeaders.forEach((header) => {
+        header.addEventListener("click", handleAccordionClick);
+      });
+    </script>
+  </body>
 </html>

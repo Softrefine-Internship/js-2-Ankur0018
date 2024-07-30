@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      /* write CSS here */
-
       * {
         margin: 0;
         padding: 0;
@@ -15,6 +13,7 @@
 
       html {
         font-size: 62.5%;
+        overflow: hidden;
         height: 100%;
       }
 
@@ -27,28 +26,32 @@
             transparent 15%
           ),
           radial-gradient(circle at 30% 10%, #d0c8df 0%, transparent 25%);
-        /* overflow: hidden; */
+        height: 100%;
+      }
+
+      .container {
+        width: 50%;
+        margin: 0 auto;
       }
 
       /* Header */
       .header {
         height: 30%;
-        width: 50%;
-        /* background-color: antiquewhite; */
-        margin: 5rem auto;
+        margin: 5rem 0;
         display: flex;
         flex-direction: column;
+        gap: 1rem;
         text-align: center;
         justify-content: center;
       }
 
-      .Contact {
+      .contact {
         font-size: 4rem;
         font-weight: 700;
       }
 
-      .Lorem {
-        font-size: 20px;
+      .lorem {
+        font-size: 2rem;
         color: #808589;
         font-weight: 500;
       }
@@ -57,6 +60,7 @@
 
       .main-body {
         height: 70%;
+        margin-bottom: 2rem;
       }
 
       .form-container {
@@ -85,11 +89,6 @@
         box-shadow: 0 0 0.2rem #e5e7ea;
         padding-left: 1rem;
         padding-top: 0.5rem;
-      }
-
-      .form-container {
-        width: 50%;
-        margin: 0 auto;
       }
 
       .name {
@@ -121,7 +120,7 @@
 
       .Phone-no-dropdown {
         display: flex;
-        /* border-collapse: collapse; */
+        border-collapse: collapse;
       }
 
       .country {
@@ -140,7 +139,7 @@
       .agreement {
         display: flex;
         align-items: center;
-        gap: 3rem;
+        gap: 2rem;
         padding-top: 1rem;
         font-size: 1.3rem;
       }
@@ -173,8 +172,8 @@
       .switch {
         position: relative;
         display: inline-block;
-        width: 5rem;
-        height: 3rem;
+        width: 4rem;
+        height: 2rem;
       }
 
       /* Hide default HTML checkbox */
@@ -202,13 +201,13 @@
       .slider:before {
         position: absolute;
         content: "";
-        height: 2.2rem;
-        width: 2.2rem;
-        left: 0.4rem;
-        bottom: 0.4rem;
-        background-color: white;
+        height: 2rem;
+        width: 2rem;
+        left: -0.1rem;
+        background-color: rgb(255, 255, 255, 0.7);
         -webkit-transition: 0.4s;
         transition: 0.4s;
+        border: 1px solid rgb(255, 255, 255, 0.2);
       }
 
       input:checked + .slider {
@@ -220,9 +219,9 @@
       }
 
       input:checked + .slider:before {
-        -webkit-transform: translateX(2rem);
-        -ms-transform: translateX(2rem);
-        transform: translateX(2rem);
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
       }
 
       /* Rounded sliders */
@@ -243,66 +242,260 @@
       .message {
         font-weight: 600;
       }
+
+      @media only screen and (max-width: 50em) {
+        html {
+          font-size: 56%;
+          /* overflow-y: scroll; */
+        }
+
+        .name {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      @media only screen and (max-width: 40em) {
+        html {
+          font-size: 53%;
+        }
+
+        .agreement-text {
+          font-size: 1.2rem;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 5rem;
+          height: 2rem;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 2rem;
+          width: 2rem;
+          left: -0.1rem;
+          background-color: rgb(255, 255, 255, 0.7);
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+          border: 1px solid rgb(255, 255, 255, 0.2);
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(100%);
+          -ms-transform: translateX(100%);
+          transform: translateX(135%);
+        }
+      }
+
+      @media only screen and (max-width: 30em) {
+        html {
+          font-size: 50%;
+        }
+
+        .contact {
+          font-size: 3rem;
+        }
+        .lorem {
+          font-size: 1.5rem;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 6rem;
+          height: 2rem;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 2rem;
+          width: 2rem;
+          left: -0.1rem;
+          background-color: rgb(255, 255, 255, 0.7);
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+          border: 1px solid rgb(255, 255, 255, 0.2);
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(140%);
+          -ms-transform: translateX(2.5rem);
+          transform: translateX(140%);
+        }
+      }
+
+      @media only screen and (max-width: 23.75em) {
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 8rem;
+          height: 2rem;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 2rem;
+          width: 2rem;
+          left: -0.1rem;
+          background-color: rgb(255, 255, 255, 0.7);
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+          border: 1px solid rgb(255, 255, 255, 0.2);
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(110%);
+          -ms-transform: translateX(3rem);
+          transform: translateX(130%);
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="header">
-      <p class="Contact">Contact sales</p>
-      <p class="Lorem">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut soluta,
-        tempora
-      </p>
-    </div>
+    <div class="container">
+      <div class="header">
+        <p class="contact">Contact sales</p>
+        <p class="lorem">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut soluta,
+          tempora
+        </p>
+      </div>
 
-    <div class="main-body">
-      <form class="form-container">
-        <div class="name">
-          <div class="first-name">
-            <label>First Name</label>
-            <input type="text" placeholder="" />
+      <div class="main-body">
+        <form id="contactForm" class="form-container">
+          <div class="name">
+            <div class="first-name">
+              <label for="firstName">First Name</label>
+              <input id="firstName" type="text" placeholder="" />
+            </div>
+            <div class="last-name">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" type="text" placeholder="" />
+            </div>
           </div>
-          <div class="last-name">
-            <label>Last name</label>
-            <input type="text" placeholder="" />
+          <div class="company">
+            <label for="company">Company</label>
+            <input id="company" type="text" placeholder="" />
           </div>
-        </div>
-        <div class="company">
-          <label>Company</label>
-          <input type="text" placeholder="" />
-        </div>
-        <div class="email">
-          <label>Email</label>
-          <input type="email" placeholder="" />
-        </div>
-        <div class="phone-number">
-          <label>Phone number</label>
-          <div class="Phone-no-dropdown">
-            <select id="Countries" name="Countries" class="country">
-              <option value="US">US</option>
-              <option value="India">India</option>
-
-              <input type="number" />
-            </select>
+          <div class="email">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="" />
           </div>
-        </div>
-        <div class="message">
-          <label for="message">Message</label>
-          <textarea></textarea>
-        </div>
-        <div class="agreement">
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-          <p class="agreement-text">
-            By selecting this,you agree to our <a href="#">privacy policy.</a>
-          </p>
-        </div>
-        <button>Let's talk</button>
-      </form>
+          <div class="phone-number">
+            <label for="phoneNumber">Phone Number</label>
+            <div class="Phone-no-dropdown">
+              <select id="country" name="Countries" class="country">
+                <option value="US">US</option>
+                <option value="India">India</option>
+              </select>
+              <input id="phoneNumber" type="number" />
+            </div>
+          </div>
+          <div class="message">
+            <label for="message">Message</label>
+            <textarea id="message"></textarea>
+          </div>
+          <div class="agreement">
+            <label class="switch">
+              <input id="agreement" type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <p class="agreement-text">
+              By selecting this, you agree to our
+              <a href="#">privacy policy.</a>
+            </p>
+          </div>
+          <button type="submit">Let's talk</button>
+        </form>
+      </div>
     </div>
+    <script>
+      // JavaScript for form validation
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          // Get form fields
+          var firstName = document.getElementById("firstName").value.trim();
+          var lastName = document.getElementById("lastName").value.trim();
+          var company = document.getElementById("company").value.trim();
+          var email = document.getElementById("email").value.trim();
+          var phoneNumber = document.getElementById("phoneNumber").value.trim();
+          var message = document.getElementById("message").value.trim();
+          var agreement = document.getElementById("agreement").checked;
+
+          // Validation flag
+          var isValid = true;
+          var errorMessage = "";
+
+          // Validate first name
+          if (firstName === "") {
+            errorMessage += "First Name is required.\n";
+            isValid = false;
+          } else if (/\d/.test(firstName)) {
+            errorMessage += "First Name should not contain numbers.\n";
+            isValid = false;
+          }
+
+          // Validate last name
+          if (lastName === "") {
+            errorMessage += "Last Name is required.\n";
+            isValid = false;
+          } else if (/\d/.test(lastName)) {
+            errorMessage += "Last Name should not contain numbers.\n";
+            isValid = false;
+          }
+
+          // Validate company
+          if (company === "") {
+            errorMessage += "Company is required.\n";
+            isValid = false;
+          }
+
+          // Validate email
+          if (email === "") {
+            errorMessage += "Email is required.\n";
+            isValid = false;
+          } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errorMessage += "Please enter a valid email address.\n";
+            isValid = false;
+          }
+
+          // Validate phone number
+          if (phoneNumber === "") {
+            errorMessage += "Phone Number is required.\n";
+            isValid = false;
+          } else if (!/^\d+$/.test(phoneNumber)) {
+            errorMessage += "Phone Number must be numeric.\n";
+            isValid = false;
+          }
+
+          // Validate message
+          if (message === "") {
+            errorMessage += "Message is required.\n";
+            isValid = false;
+          }
+
+          // Validate agreement
+          if (!agreement) {
+            errorMessage += "You must agree to the privacy policy.\n";
+            isValid = false;
+          }
+
+          // If validation fails, show alert with errors and prevent form submission
+          if (!isValid) {
+            alert(errorMessage);
+            event.preventDefault();
+          } else {
+            // If validation passes, show success message and allow form submission
+            alert("Form submitted successfully!");
+          }
+        });
+    </script>
   </body>
-  <script>
-    // write javascript here
-  </script>
 </html>

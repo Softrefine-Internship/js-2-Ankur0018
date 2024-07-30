@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Pagination</title>
     <style>
       * {
         margin: 0;
@@ -83,6 +83,18 @@
       }
       .pagination__link:focus {
         outline: none;
+      }
+
+      @media only screen and (max-width: 50em) {
+        html {
+          font-size: 56%;
+        }
+      }
+
+      @media only screen and (max-width: 30em) {
+        html {
+          font-size: 50%;
+        }
       }
     </style>
   </head>

@@ -28,25 +28,23 @@
         overflow: hidden;
       }
 
-      .carousel .carousel__item {
-        height: 100vh;
-        width: 100vw;
+      .carousel {
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        width: 100vw; /* Ensure full viewport width */
       }
 
-      .carousel .carousel__item img {
-        height: 100%;
+      .carousel__item {
+        flex: 0 0 100vw; /* Ensure each item takes full viewport width */
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel img {
         width: 100%;
+        height: 100vh; /* Ensure full viewport height */
         object-fit: cover;
         position: relative;
-      }
-
-      .carousel .carousel__item,
-      .carousel.carousel__item--hidden {
-        display: none;
-      }
-
-      .carousel__item.carousel__item--visible {
-        display: block;
       }
 
       .carousel__button {
@@ -55,13 +53,14 @@
         align-items: center;
         position: absolute;
         top: 50%;
-
         height: 4rem;
         width: 4rem;
         cursor: pointer;
         transform: translateY(-50%);
-        background-color: #737a85;
+        background-color: rgba(0, 0, 0, 0.5);
         border-radius: 50%;
+        color: #fff;
+        z-index: 10;
       }
 
       .carousel__button:hover,
@@ -78,21 +77,18 @@
       }
 
       .icon {
-        position: absolute;
-        top: 50%;
         height: 2.5rem;
         width: 2.5rem;
-        cursor: pointer;
-        transform: translateY(-50%);
-        color: #fff;
-        background-color: #737a85;
-        border-radius: 50%;
       }
 
       .carousel__dots {
+        position: absolute;
+        bottom: 4rem;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         justify-content: center;
-        margin-top: 1rem;
+        z-index: 10;
       }
 
       .carousel__dot {
@@ -103,99 +99,111 @@
         margin: 0 0.5rem;
         cursor: pointer;
         transition: background-color 0.3s;
-        transform: translateY(-5rem);
       }
 
       .carousel__dot.active {
-        background-color: rgba(204, 204, 204, 0.1);
+        background-color: rgba(204, 204, 204, 0.5);
         border: 2px solid #fff;
       }
     </style>
   </head>
   <body>
     <div class="carousel">
-      <div class="carousel__item carousel__item--visible">
-        <img src="Images/img-1.jpg" alt="" />
-      </div>
-      <div class="carousel__item"><img src="Images/img-2.jpg" alt="" /></div>
-      <div class="carousel__item"><img src="Images/img-3.jpg" alt="" /></div>
-      <div class="carousel__item"><img src="Images/img-4.jpg" alt="" /></div>
-      <div class="carousel__item"><img src="Images/img-5.jpg" alt="" /></div>
-
-      <div class="carousel__actions">
-        <div class="carousel__button carousel__button-left">
-          <ion-icon
-            name="chevron-back-outline"
-            class="icon carousel__button--prev"
-          ></ion-icon>
-        </div>
-        <div class="carousel__button carousel__button-right">
-          <ion-icon
-            name="chevron-forward-outline"
-            class="icon carousel__button--next"
-          ></ion-icon>
-        </div>
-      </div>
-
-      <div class="carousel__dots">
-        <span class="carousel__dot"></span>
-        <span class="carousel__dot"></span>
-        <span class="carousel__dot"></span>
-        <span class="carousel__dot"></span>
-        <span class="carousel__dot"></span>
-      </div>
+      <img src="Images/img-1.jpg" alt="" class="carousel__item" />
+      <img src="Images/img-2.jpg" alt="" class="carousel__item" />
+      <img src="Images/img-3.jpg" alt="" class="carousel__item" />
+      <img src="Images/img-4.jpg" alt="" class="carousel__item" />
+      <img src="Images/img-5.jpg" alt="" class="carousel__item" />
     </div>
+
+    <div class="carousel__button carousel__button-left">
+      <ion-icon name="chevron-back-outline" class="icon"></ion-icon>
+    </div>
+    <div class="carousel__button carousel__button-right">
+      <ion-icon name="chevron-forward-outline" class="icon"></ion-icon>
+    </div>
+
+    <div class="carousel__dots">
+      <span class="carousel__dot active"></span>
+      <span class="carousel__dot"></span>
+      <span class="carousel__dot"></span>
+      <span class="carousel__dot"></span>
+      <span class="carousel__dot"></span>
+    </div>
+
+    <script>
+      let slidePosition = 0;
+      const slides = document.getElementsByClassName("carousel__item");
+      const totalSlides = slides.length;
+      const nextButton = document.querySelector(".carousel__button-right");
+      const prevButton = document.querySelector(".carousel__button-left");
+      const dots = document.querySelectorAll(".carousel__dot");
+
+      nextButton.addEventListener("click", moveToNextSlide);
+      prevButton.addEventListener("click", moveToPrevSlide);
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          moveToSlide(index);
+        });
+      });
+
+      function updateSlidePosition() {
+        for (let i = 0; i < totalSlides; i++) {
+          slides[i].style.transform = `translateX(-${slidePosition * 100}vw)`;
+        }
+      }
+
+      function updateDotIndicator() {
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === slidePosition);
+        });
+      }
+
+      function moveToNextSlide() {
+        if (slidePosition === totalSlides - 1) {
+          slidePosition = 0;
+        } else {
+          slidePosition++;
+        }
+        updateSlidePosition();
+        updateDotIndicator();
+      }
+
+      function moveToPrevSlide() {
+        if (slidePosition === 0) {
+          slidePosition = totalSlides - 1;
+        } else {
+          slidePosition--;
+        }
+        updateSlidePosition();
+        updateDotIndicator();
+      }
+
+      function moveToSlide(index) {
+        slidePosition = index;
+        updateSlidePosition();
+        updateDotIndicator();
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          moveToNextSlide();
+          nextButton.classList.add("hover");
+          setTimeout(function () {
+            nextButton.classList.remove("hover");
+          }, 500);
+        } else if (event.key === "ArrowLeft") {
+          moveToPrevSlide();
+          prevButton.classList.add("hover");
+          setTimeout(function () {
+            prevButton.classList.remove("hover");
+          }, 500);
+        }
+      });
+
+      updateSlidePosition();
+      updateDotIndicator();
+    </script>
   </body>
-  <script>
-    let slidePosition = 0;
-    const slides = document.getElementsByClassName("carousel__item");
-    const totalSlides = slides.length;
-    const nextButton = document.querySelector(".carousel__button-right");
-    const prevButton = document.querySelector(".carousel__button-left");
-    const dots = document.querySelectorAll(".carousel__dot");
-
-    nextButton.addEventListener("click", moveToNextSlide);
-    prevButton.addEventListener("click", moveToPrevSlide);
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "ArrowRight") {
-        moveToNextSlide();
-        nextButton.classList.add("hover");
-        setTimeout(function () {
-          nextButton.classList.remove("hover");
-        }, 500);
-      } else if (event.key === "ArrowLeft") {
-        moveToPrevSlide();
-        prevButton.classList.add("hover");
-        setTimeout(function () {
-          prevButton.classList.remove("hover");
-        }, 500);
-      }
-    });
-
-    function updateSlideAction() {
-      for (let slide of slides) {
-        slide.classList.remove("carousel__item--visible");
-        slide.classList.add("carousel__item--hidden");
-      }
-      slides[slidePosition].classList.add("carousel__item--visible");
-      for (let dot of dots) {
-        dot.classList.remove("active");
-      }
-      dots[slidePosition].classList.add("active");
-    }
-    function moveToNextSlide() {
-      if (slidePosition === totalSlides - 1) {
-        slidePosition = 0;
-      } else slidePosition++;
-      updateSlideAction();
-    }
-    function moveToPrevSlide() {
-      if (slidePosition === 0) {
-        slidePosition = totalSlides - 1;
-      } else slidePosition--;
-      updateSlideAction();
-    }
-    updateSlideAction();
-  </script>
 </html>

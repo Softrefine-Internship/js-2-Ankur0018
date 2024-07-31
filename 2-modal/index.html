@@ -51,10 +51,6 @@
         transform: translateX(3rem);
       }
 
-      .hidden {
-        display: none;
-      }
-
       /* Font-stylings */
 
       .text-dark {
@@ -93,7 +89,7 @@
 
       .show-modal--btn:hover,
       .deactivate-btn:hover {
-        background-color: rgba(226, 38, 42, 0.85);
+        background-color: #cb2226;
       }
 
       .cancel-btn {
@@ -117,7 +113,7 @@
       }
 
       .deactivate-btn:hover {
-        background-color: rgba(226, 38, 42, 0.85);
+        background-color: #cb2226;
       }
 
       /* Icon-stylings */
@@ -169,6 +165,8 @@
         box-shadow: 0 0 0.3rem rgb(27, 27, 27, 0.5);
         padding: 2.5rem 2rem;
         background-color: #fff;
+        opacity: 1;
+        transition: all 0.3s ease-in;
       }
 
       /* OverlayEffect */
@@ -181,6 +179,19 @@
         background-color: rgb(132, 138, 150);
         backdrop-filter: blur(3px);
         z-index: 50;
+        opacity: 1;
+        transition: all 0.3s ease-in;
+      }
+
+      .hidden {
+        opacity: 0;
+        /* visibility: hidden; */
+        transform: translate(-50%, -50%) scale(0);
+      }
+
+      .hide-overlay {
+        opacity: 0;
+        z-index: -1;
       }
 
       @media only screen and (max-width: 56.25em) {
@@ -221,8 +232,8 @@
   </head>
   <body class="main-container">
     <button class="btn show-modal--btn show-modal">Deactivate account</button>
-    <div class="modal hidden">
-      <div class="modal-container">
+    <div class="modal">
+      <div class="modal-container hidden">
         <div class="danger-icon-container">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -263,26 +274,26 @@
         </div>
       </div>
     </div>
-    <div class="overlay hidden"></div>
+    <div class="overlay hide-overlay"></div>
   </body>
   <script>
     // write javascript here
 
     "use strict";
 
-    const modal = document.querySelector(".modal");
+    const modal = document.querySelector(".modal-container");
     const overlay = document.querySelector(".overlay");
     const btnCloseModal = document.querySelectorAll(".close-modal");
     const btnsOpenModal = document.querySelector(".show-modal");
 
     const openModal = function () {
       modal.classList.remove("hidden");
-      overlay.classList.remove("hidden");
+      overlay.classList.remove("hide-overlay");
     };
 
     const closeModal = function () {
       modal.classList.add("hidden");
-      overlay.classList.add("hidden");
+      overlay.classList.add("hide-overlay");
     };
 
     btnsOpenModal.addEventListener("click", openModal);

@@ -41,6 +41,7 @@
         border: 1px solid #ccc;
         display: inline-block;
         cursor: pointer;
+        transition: opacity 0.3s;
       }
       .pagination__btn:hover {
         color: rgb(17, 114, 235);
@@ -100,7 +101,12 @@
   </head>
   <body>
     <div class="pagination__container">
-      <button class="pagination__btn pagination__btn--prev">Previous</button>
+      <button
+        class="pagination__btn pagination__btn--prev"
+        style="display: none"
+      >
+        Previous
+      </button>
       <ul class="pagination__list">
         <li class="pagination__item">
           <a href="#" class="pagination__link active">1</a>
@@ -120,45 +126,58 @@
       </ul>
       <button class="pagination__btn pagination__btn--next">Next</button>
     </div>
-  </body>
-  <script>
-    let activePage = 0;
-    const pageNo = document.querySelectorAll(".pagination__link");
-    const nextButton = document.querySelector(".pagination__btn--next");
-    const prevButton = document.querySelector(".pagination__btn--prev");
+    <script>
+      let activePageIndex = 0;
+      const pageNo = document.querySelectorAll(".pagination__link");
+      const nextButton = document.querySelector(".pagination__btn--next");
+      const prevButton = document.querySelector(".pagination__btn--prev");
 
-    function moveToNextPage() {
-      if (activePage < pageNo.length - 1) {
-        activePage++;
-        updateActivePage();
+      function updateButtons() {
+        prevButton.style.display =
+          activePageIndex === 0 ? "none" : "inline-block";
+        nextButton.style.display =
+          activePageIndex === pageNo.length - 1 ? "none" : "inline-block";
       }
-    }
 
-    function moveToPrevPage() {
-      if (activePage > 0) {
-        activePage--;
-        updateActivePage();
+      function moveToNextPage() {
+        if (activePageIndex < pageNo.length - 1) {
+          activePageIndex++;
+          updateActivePage();
+        }
       }
-    }
 
-    function handlePageClick(event) {
-      const clickedPage = event.target;
-      activePage = Array.from(pageNo).indexOf(clickedPage);
-      updateActivePage();
-    }
+      function moveToPrevPage() {
+        if (activePageIndex > 0) {
+          activePageIndex--;
+          updateActivePage();
+        }
+      }
 
-    function updateActivePage() {
-      pageNo.forEach((page, index) => {
-        page.classList.toggle("active", index === activePage);
+      function handlePageClick(event) {
+        event.preventDefault();
+        const clickedPageIndex = Array.from(pageNo).indexOf(event.target);
+        if (clickedPageIndex !== activePageIndex) {
+          activePageIndex = clickedPageIndex;
+          updateActivePage();
+        }
+      }
+
+      function updateActivePage() {
+        pageNo.forEach((page, index) => {
+          page.classList.toggle("active", index === activePageIndex);
+        });
+        updateButtons();
+        console.log(`Active page: ${activePageIndex + 1}`);
+      }
+
+      nextButton.addEventListener("click", moveToNextPage);
+      prevButton.addEventListener("click", moveToPrevPage);
+
+      pageNo.forEach((page) => {
+        page.addEventListener("click", handlePageClick);
       });
-      console.log(`Active page: ${activePage + 1}`);
-    }
 
-    nextButton.addEventListener("click", moveToNextPage);
-    prevButton.addEventListener("click", moveToPrevPage);
-
-    pageNo.forEach((page) => {
-      page.addEventListener("click", handlePageClick);
-    });
-  </script>
+      updateButtons();
+    </script>
+  </body>
 </html>

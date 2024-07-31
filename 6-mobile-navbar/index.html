@@ -80,9 +80,14 @@
         display: none;
       }
 
-      *:focus {
+      .btn-nav-mobile:focus {
         outline: none;
         box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+      }
+
+      .desktop-btn:focus {
+        outline: none;
+        box-shadow: none;
       }
 
       @media only screen and (max-width: 75em) {
@@ -214,7 +219,9 @@
             <a class="nav-link" href="#">Testimonials</a>
           </li>
           <li><a class="nav-link" href="#">Pricing</a></li>
-          <li><a class="nav-link nav-cta" href="#">Try for free</a></li>
+          <li>
+            <a class="nav-link nav-cta desktop-btn" href="#">Try for free</a>
+          </li>
         </ul>
       </nav>
       <div class="btn-nav-mobile">

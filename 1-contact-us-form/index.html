@@ -27,6 +27,9 @@
           ),
           radial-gradient(circle at 30% 10%, #d0c8df 0%, transparent 25%);
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .container {
@@ -37,7 +40,7 @@
       /* Header */
       .header {
         height: 30%;
-        margin: 5rem 0;
+        margin: 4rem 0 5rem 0;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -77,6 +80,7 @@
         border: 0.2rem solid #ced0d3;
         border-radius: 5px;
         box-shadow: 0 0 2px #e5e7ea;
+        font-size: 1.4rem;
       }
 
       textarea {
@@ -87,8 +91,8 @@
         border: 0.2rem solid #ced0d3;
         border-radius: 0.5rem;
         box-shadow: 0 0 0.2rem #e5e7ea;
-        padding-left: 1rem;
-        padding-top: 0.5rem;
+        padding: 1rem;
+        font-size: 1.4rem;
       }
 
       .name {
@@ -99,7 +103,7 @@
 
       input {
         width: 100%;
-        padding-left: 1rem;
+        padding: 0 1rem;
       }
 
       label {
@@ -108,8 +112,6 @@
 
       .phone-number input {
         width: 100%;
-        /* padding-left: 15px; */
-        /* border-collapse: collapse; */
         border-left: none;
         border-radius: 0;
         border-top-right-radius: 0.5rem;
@@ -126,14 +128,13 @@
       .country {
         height: 4rem;
         margin-top: 1rem;
-
+        background-color: #fff;
         border-top-left-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
         color: #adb5bd;
         padding-left: 1rem;
         border: 0.2rem solid #ced0d3;
-        box-shadow: 0 0 0.2rem #e5e7ea;
-        border-right: 0;
+        border-right: none;
       }
 
       .agreement {
@@ -142,6 +143,7 @@
         gap: 2rem;
         padding-top: 1rem;
         font-size: 1.3rem;
+        margin-bottom: 1.5rem;
       }
 
       .agreement p {
@@ -165,7 +167,7 @@
       }
 
       button:hover {
-        background-color: #1a285e;
+        background-color: #4242ca;
       }
 
       /* Slider button */
@@ -176,61 +178,44 @@
         height: 2rem;
       }
 
-      /* Hide default HTML checkbox */
       .switch input {
         opacity: 0;
         width: 0;
         height: 0;
       }
 
-      /* The slider */
-      .slider {
-        display: flex;
-        align-items: center;
-        position: absolute;
+      .checkbox-slider {
+        display: block;
+        width: 40px;
+        height: 20px;
+        position: relative;
+        background: rgb(167, 167, 167, 0.5);
+        border-radius: 10px;
+        transition: background 0.2s ease;
         cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
+        transform: translateY(-1rem);
       }
 
-      .slider:before {
-        position: absolute;
+      .checkbox-slider::before {
         content: "";
-        height: 2rem;
-        width: 2rem;
-        left: -0.1rem;
-        background-color: rgb(255, 255, 255, 0.7);
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-        border: 1px solid rgb(255, 255, 255, 0.2);
-      }
-
-      input:checked + .slider {
-        background-color: #2196f3;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196f3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-        transform: translateX(100%);
-      }
-
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 3.4rem;
-      }
-
-      .slider.round:before {
+        display: block;
+        width: 50%;
+        height: 100%;
+        background: #ffffff;
         border-radius: 50%;
+        box-shadow: 0 0 0 1px rgb(0, 0, 0, 0.1);
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .switch input:checked + .checkbox-slider {
+        background: #2196f3;
+      }
+
+      .switch input:checked + .checkbox-slider::before {
+        transform: translateX(100%);
       }
 
       /* Sizing and font-weight */
@@ -249,6 +234,10 @@
           /* overflow-y: scroll; */
         }
 
+        .container {
+          width: 70%;
+        }
+
         .name {
           display: flex;
           flex-direction: column;
@@ -261,33 +250,12 @@
           font-size: 53%;
         }
 
+        .container {
+          width: 70%;
+        }
+
         .agreement-text {
           font-size: 1.2rem;
-        }
-
-        .switch {
-          position: relative;
-          display: inline-block;
-          width: 5rem;
-          height: 2rem;
-        }
-
-        .slider:before {
-          position: absolute;
-          content: "";
-          height: 2rem;
-          width: 2rem;
-          left: -0.1rem;
-          background-color: rgb(255, 255, 255, 0.7);
-          -webkit-transition: 0.4s;
-          transition: 0.4s;
-          border: 1px solid rgb(255, 255, 255, 0.2);
-        }
-
-        input:checked + .slider:before {
-          -webkit-transform: translateX(100%);
-          -ms-transform: translateX(100%);
-          transform: translateX(135%);
         }
       }
 
@@ -296,63 +264,15 @@
           font-size: 50%;
         }
 
+        .container {
+          width: 80%;
+        }
+
         .contact {
           font-size: 3rem;
         }
         .lorem {
           font-size: 1.5rem;
-        }
-
-        .switch {
-          position: relative;
-          display: inline-block;
-          width: 6rem;
-          height: 2rem;
-        }
-
-        .slider:before {
-          position: absolute;
-          content: "";
-          height: 2rem;
-          width: 2rem;
-          left: -0.1rem;
-          background-color: rgb(255, 255, 255, 0.7);
-          -webkit-transition: 0.4s;
-          transition: 0.4s;
-          border: 1px solid rgb(255, 255, 255, 0.2);
-        }
-
-        input:checked + .slider:before {
-          -webkit-transform: translateX(140%);
-          -ms-transform: translateX(2.5rem);
-          transform: translateX(140%);
-        }
-      }
-
-      @media only screen and (max-width: 23.75em) {
-        .switch {
-          position: relative;
-          display: inline-block;
-          width: 8rem;
-          height: 2rem;
-        }
-
-        .slider:before {
-          position: absolute;
-          content: "";
-          height: 2rem;
-          width: 2rem;
-          left: -0.1rem;
-          background-color: rgb(255, 255, 255, 0.7);
-          -webkit-transition: 0.4s;
-          transition: 0.4s;
-          border: 1px solid rgb(255, 255, 255, 0.2);
-        }
-
-        input:checked + .slider:before {
-          -webkit-transform: translateX(110%);
-          -ms-transform: translateX(3rem);
-          transform: translateX(130%);
         }
       }
     </style>
@@ -372,20 +292,44 @@
           <div class="name">
             <div class="first-name">
               <label for="firstName">First Name</label>
-              <input id="firstName" type="text" placeholder="" />
+              <input
+                id="firstName"
+                type="text"
+                placeholder=""
+                maxlength="50"
+                required
+              />
             </div>
             <div class="last-name">
               <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" placeholder="" />
+              <input
+                id="lastName"
+                type="text"
+                placeholder=""
+                maxlength="50"
+                required
+              />
             </div>
           </div>
           <div class="company">
             <label for="company">Company</label>
-            <input id="company" type="text" placeholder="" />
+            <input
+              id="company"
+              type="text"
+              placeholder=""
+              maxlength="100"
+              required
+            />
           </div>
           <div class="email">
             <label for="email">Email</label>
-            <input id="email" type="email" placeholder="" />
+            <input
+              id="email"
+              type="email"
+              placeholder=""
+              maxlength="50"
+              required
+            />
           </div>
           <div class="phone-number">
             <label for="phoneNumber">Phone Number</label>
@@ -394,33 +338,32 @@
                 <option value="US">US</option>
                 <option value="India">India</option>
               </select>
-              <input id="phoneNumber" type="number" />
+              <input id="phoneNumber" type="tel" maxlength="15" required />
             </div>
           </div>
           <div class="message">
             <label for="message">Message</label>
-            <textarea id="message"></textarea>
+            <textarea id="message" maxlength="500" required></textarea>
           </div>
           <div class="agreement">
             <label class="switch">
-              <input id="agreement" type="checkbox" />
-              <span class="slider round"></span>
+              <input id="agreement" type="checkbox" required />
+              <div class="checkbox-slider"></div>
             </label>
             <p class="agreement-text">
               By selecting this, you agree to our
               <a href="#">privacy policy.</a>
             </p>
           </div>
+
           <button type="submit">Let's talk</button>
         </form>
       </div>
     </div>
     <script>
-      // JavaScript for form validation
       document
         .getElementById("contactForm")
         .addEventListener("submit", function (event) {
-          // Get form fields
           var firstName = document.getElementById("firstName").value.trim();
           var lastName = document.getElementById("lastName").value.trim();
           var company = document.getElementById("company").value.trim();

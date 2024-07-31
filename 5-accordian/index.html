@@ -40,15 +40,15 @@
 
       .accordion--body {
         font-size: 1.6rem;
-        display: none;
+        display: none; /* Hidden by default */
       }
 
-      .accordion--body.active {
-        display: block;
+      .accordion.active .accordion--body {
+        display: block; /* Show when parent is active */
       }
 
-      .accordion--header-text.active {
-        color: #4f79c9;
+      .accordion.active .accordion--header-text {
+        color: #4f79c9; /* Change color when parent is active */
       }
 
       /* Icon-styles */
@@ -56,9 +56,9 @@
         font-size: 2.2rem;
       }
 
-      .arrow-icon.active {
-        color: #4f79c9;
-        transform: rotate(180deg);
+      .accordion.active .arrow-icon {
+        color: #4f79c9; /* Change icon color when parent is active */
+        transform: rotate(180deg); /* Rotate icon when parent is active */
       }
 
       /* Layout */
@@ -163,21 +163,13 @@
     </div>
 
     <script>
-      const accordionHeaders = document.querySelectorAll(".accordion--header");
+      const accordionItems = document.querySelectorAll(".accordion");
 
-      function handleAccordionClick(event) {
-        const header = event.currentTarget;
-        const accordion = header.parentElement;
-
-        header.querySelector(".arrow-icon").classList.toggle("active");
-        header
-          .querySelector(".accordion--header-text")
-          .classList.toggle("active");
-        accordion.querySelector(".accordion--body").classList.toggle("active");
-      }
-
-      accordionHeaders.forEach((header) => {
-        header.addEventListener("click", handleAccordionClick);
+      accordionItems.forEach((accordion) => {
+        const header = accordion.querySelector(".accordion--header");
+        header.addEventListener("click", () => {
+          accordion.classList.toggle("active");
+        });
       });
     </script>
   </body>

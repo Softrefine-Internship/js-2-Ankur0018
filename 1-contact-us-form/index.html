@@ -200,13 +200,13 @@
         content: "";
         display: block;
         width: 50%;
-        height: 100%;
+        height: 85%;
         background: #ffffff;
         border-radius: 50%;
         box-shadow: 0 0 0 1px rgb(0, 0, 0, 0.1);
         position: absolute;
-        left: 0;
-        top: 0;
+        left: 0.1rem;
+        top: 0.1rem;
         transition: transform 0.2s ease-in-out;
       }
 
@@ -215,7 +215,21 @@
       }
 
       .switch input:checked + .checkbox-slider::before {
-        transform: translateX(100%);
+        transform: translateX(95%);
+      }
+
+      option {
+        color: rgba(0, 0, 0, 1);
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type="number"] {
+        -moz-appearance: textfield;
       }
 
       /* Sizing and font-weight */
@@ -338,7 +352,7 @@
                 <option value="US">US</option>
                 <option value="India">India</option>
               </select>
-              <input id="phoneNumber" type="tel" maxlength="15" required />
+              <input id="phoneNumber" type="number" maxlength="15" required />
             </div>
           </div>
           <div class="message">

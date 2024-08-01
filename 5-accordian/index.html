@@ -39,12 +39,14 @@
       }
 
       .accordion--body {
-        font-size: 1.6rem;
-        display: none; /* Hidden by default */
+        font-size: 1.6rem; /* Hidden by default */
       }
 
       .accordion.active .accordion--body {
-        display: block; /* Show when parent is active */
+        opacity: 1;
+        max-height: 100%;
+        padding: 1rem 2rem;
+        visibility: visible;
       }
 
       .accordion.active .accordion--header-text {
@@ -78,7 +80,13 @@
       }
 
       .accordion--body {
-        padding: 1rem 2rem;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: scaleY(100%);
+        padding: 0 2rem;
+        transition: all 0.5s ease-in-out;
+        transform-origin: top;
       }
 
       .accordion:not(:last-child) {

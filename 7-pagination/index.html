@@ -41,7 +41,7 @@
         border: 1px solid #ccc;
         display: inline-block;
         cursor: pointer;
-        transition: opacity 0.3s;
+        transition: opacity 0.3s, background-color 0.3s;
       }
       .pagination__btn:hover {
         color: rgb(17, 114, 235);
@@ -49,6 +49,11 @@
       }
       .pagination__btn:focus {
         outline: none;
+      }
+      .pagination__btn:disabled {
+        color: #aaa;
+        border-color: #aaa;
+        cursor: not-allowed;
       }
       .pagination__btn--prev {
         border-radius: 1rem 0 0 1rem;
@@ -86,6 +91,32 @@
         outline: none;
       }
 
+      /* Para */
+      .para.active {
+        display: block;
+      }
+
+      .para {
+        display: none;
+      }
+
+      .para span {
+        font-weight: 700;
+        font-size: 2rem;
+      }
+
+      /* Data Container */
+
+      .data-container {
+        width: 70%;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid #777;
+        padding: 2rem;
+      }
+
       @media only screen and (max-width: 50em) {
         html {
           font-size: 56%;
@@ -100,10 +131,44 @@
     </style>
   </head>
   <body>
+    <div class="data-container">
+      <p class="para para1 active">
+        <span>Data for page 1:-</span> Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit. Quia illum maiores facere minima ducimus architecto
+        tempora repellendus cumque odit dolor consequuntur, enim accusantium
+        exercitationem explicabo inventore ad consectetur dolorem corporis.
+      </p>
+      <p class="para para2">
+        <span>Data for page 2:-</span> Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit. Dolorem vero molestiae quas porro, ipsa sit fuga
+        repellendus ea odit sed commodi, nostrum, accusantium illum velit nisi
+        iusto dolorum ipsum ut.
+      </p>
+      <p class="para para3">
+        <span>Data for page 3:-</span> Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Qui quia totam illum ipsam enim aperiam, commodi,
+        tenetur suscipit eveniet quidem tempore quisquam facere exercitationem
+        eos cum quos nemo dignissimos placeat.
+      </p>
+      <p class="para para4">
+        <span>Data for page 4:-</span> Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Est ad illum iure culpa quo ipsam, adipisci blanditiis
+        omnis aut soluta rem expedita iusto tenetur, iste modi, quis sapiente
+        tempora. Ad!
+      </p>
+      <p class="para para5">
+        <span>Data for page 5:-</span> Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Earum natus veritatis ipsam temporibus doloribus
+        cupiditate nihil, eligendi inventore itaque dignissimos veniam ullam
+        ipsum praesentium aliquam eveniet reprehenderit necessitatibus.
+        Consequatur, modi!
+      </p>
+    </div>
     <div class="pagination__container">
       <button
         class="pagination__btn pagination__btn--prev"
-        style="display: none"
+        id="prevBtn"
+        disabled
       >
         Previous
       </button>
@@ -124,19 +189,20 @@
           <a href="#" class="pagination__link">5</a>
         </li>
       </ul>
-      <button class="pagination__btn pagination__btn--next">Next</button>
+      <button class="pagination__btn pagination__btn--next" id="nextBtn">
+        Next
+      </button>
     </div>
     <script>
       let activePageIndex = 0;
       const pageNo = document.querySelectorAll(".pagination__link");
-      const nextButton = document.querySelector(".pagination__btn--next");
-      const prevButton = document.querySelector(".pagination__btn--prev");
+      const nextButton = document.getElementById("nextBtn");
+      const prevButton = document.getElementById("prevBtn");
+      const paras = document.querySelectorAll(".para");
 
       function updateButtons() {
-        prevButton.style.display =
-          activePageIndex === 0 ? "none" : "inline-block";
-        nextButton.style.display =
-          activePageIndex === pageNo.length - 1 ? "none" : "inline-block";
+        prevButton.disabled = activePageIndex === 0;
+        nextButton.disabled = activePageIndex === pageNo.length - 1;
       }
 
       function moveToNextPage() {
@@ -156,7 +222,7 @@
       function handlePageClick(event) {
         event.preventDefault();
         const clickedPageIndex = Array.from(pageNo).indexOf(event.target);
-        if (clickedPageIndex !== activePageIndex) {
+        if (clickedPageIndex !== -1 && clickedPageIndex !== activePageIndex) {
           activePageIndex = clickedPageIndex;
           updateActivePage();
         }
@@ -166,13 +232,14 @@
         pageNo.forEach((page, index) => {
           page.classList.toggle("active", index === activePageIndex);
         });
+        paras.forEach((paragraph, index) => {
+          paragraph.classList.toggle("active", index === activePageIndex);
+        });
         updateButtons();
-        console.log(`Active page: ${activePageIndex + 1}`);
       }
 
       nextButton.addEventListener("click", moveToNextPage);
       prevButton.addEventListener("click", moveToPrevPage);
-
       pageNo.forEach((page) => {
         page.addEventListener("click", handlePageClick);
       });

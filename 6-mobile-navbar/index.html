@@ -80,7 +80,7 @@
         display: none;
       }
 
-      .btn-nav-mobile:focus {
+      *:focus {
         outline: none;
         box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
       }
@@ -127,7 +127,6 @@
           outline: none;
           box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
         }
-
         .nav {
           display: flex;
           align-items: center;
@@ -150,6 +149,16 @@
           pointer-events: auto;
           visibility: visible;
           transform: translateX(0);
+        }
+
+        .btn-nav-mobile:focus {
+          outline: none;
+          box-shadow: none;
+        }
+
+        .nav-open .btn-nav-mobile:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
         }
         .nav-list {
           flex-direction: column;
@@ -202,6 +211,10 @@
           height: 4rem;
           z-index: 100;
         }
+
+        .header.nav-open .menu-mobile-nav {
+          transform: translateY(-0.7rem);
+        }
       }
     </style>
   </head>
@@ -236,6 +249,7 @@
 
     mobileBtnNav.addEventListener("click", function () {
       header.classList.toggle("nav-open");
+      mobileBtnNav.blur();
     });
 
     for (let i = 0; i < navLink.length; i++) {

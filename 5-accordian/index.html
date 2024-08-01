@@ -47,6 +47,7 @@
         max-height: 100%;
         padding: 1rem 2rem;
         visibility: visible;
+        backface-visibility: hidden;
       }
 
       .accordion.active .accordion--header-text {
@@ -85,8 +86,9 @@
         visibility: hidden;
         transform: scaleY(100%);
         padding: 0 2rem;
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         transform-origin: top;
+        backface-visibility: hidden;
       }
 
       .accordion:not(:last-child) {

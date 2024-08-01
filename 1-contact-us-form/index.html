@@ -131,7 +131,7 @@
         background-color: #fff;
         border-top-left-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
-        color: #adb5bd;
+        color: #797f84;
         padding-left: 1rem;
         border: 0.2rem solid #ced0d3;
         border-right: none;
@@ -206,7 +206,7 @@
         box-shadow: 0 0 0 1px rgb(0, 0, 0, 0.1);
         position: absolute;
         left: 0.1rem;
-        top: 0.1rem;
+        top: 0.15rem;
         transition: transform 0.2s ease-in-out;
       }
 
@@ -215,7 +215,7 @@
       }
 
       .switch input:checked + .checkbox-slider::before {
-        transform: translateX(95%);
+        transform: translateX(90%);
       }
 
       option {
@@ -352,7 +352,7 @@
                 <option value="US">US</option>
                 <option value="India">India</option>
               </select>
-              <input id="phoneNumber" type="number" maxlength="15" required />
+              <input id="phoneNumber" type="number" maxlength="10" required />
             </div>
           </div>
           <div class="message">
@@ -429,6 +429,9 @@
             isValid = false;
           } else if (!/^\d+$/.test(phoneNumber)) {
             errorMessage += "Phone Number must be numeric.\n";
+            isValid = false;
+          } else if (!/^\d{10}$/.test(phoneNumber)) {
+            errorMessage += "Phone Number must be exactly 10 digits.\n";
             isValid = false;
           }
 

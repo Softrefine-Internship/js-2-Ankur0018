@@ -13,20 +13,20 @@
 
       html {
         font-size: 62.5%;
-        overflow: hidden;
+        /* overflow: hidden; */
         height: 100%;
-      }
-
-      body {
-        font-family: "Poppins", sans-serif;
-
         background-image: radial-gradient(
             circle at 5% 30%,
             rgba(247, 229, 244, 1) 5%,
             transparent 15%
           ),
           radial-gradient(circle at 30% 10%, #d0c8df 0%, transparent 25%);
-        height: 100%;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+
+        height: 98%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -311,6 +311,7 @@
                 type="text"
                 placeholder=""
                 maxlength="50"
+                onkeyup="enableSubmit()"
                 required
               />
             </div>
@@ -321,6 +322,7 @@
                 type="text"
                 placeholder=""
                 maxlength="50"
+                onkeyup="enableSubmit()"
                 required
               />
             </div>
@@ -332,6 +334,7 @@
               type="text"
               placeholder=""
               maxlength="100"
+              onkeyup="enableSubmit()"
               required
             />
           </div>
@@ -342,6 +345,7 @@
               type="email"
               placeholder=""
               maxlength="50"
+              onkeyup="enableSubmit()"
               required
             />
           </div>
@@ -352,16 +356,32 @@
                 <option value="US">US</option>
                 <option value="India">India</option>
               </select>
-              <input id="phoneNumber" type="number" maxlength="10" required />
+              <input
+                id="phoneNumber"
+                type="number"
+                maxlength="10"
+                onkeyup="enableSubmit()"
+                required
+              />
             </div>
           </div>
           <div class="message">
             <label for="message">Message</label>
-            <textarea id="message" maxlength="500" required></textarea>
+            <textarea
+              id="message"
+              maxlength="500"
+              onkeyup="enableSubmit()"
+              required
+            ></textarea>
           </div>
           <div class="agreement">
             <label class="switch">
-              <input id="agreement" type="checkbox" required />
+              <input
+                id="agreement"
+                type="checkbox"
+                onkeyup="enableSubmit()"
+                required
+              />
               <div class="checkbox-slider"></div>
             </label>
             <p class="agreement-text">
@@ -370,7 +390,7 @@
             </p>
           </div>
 
-          <button type="submit">Let's talk</button>
+          <button type="submit" class="submit-btn">Let's talk</button>
         </form>
       </div>
     </div>
@@ -385,6 +405,7 @@
           var phoneNumber = document.getElementById("phoneNumber").value.trim();
           var message = document.getElementById("message").value.trim();
           var agreement = document.getElementById("agreement").checked;
+          const submit_btn = document.querySelector(".submit-button");
 
           // Validation flag
           var isValid = true;

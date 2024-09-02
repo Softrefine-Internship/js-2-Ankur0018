@@ -39,19 +39,11 @@
       }
 
       .accordion--body {
-        font-size: 1.6rem; /* Hidden by default */
-      }
-
-      .accordion.active .accordion--body {
-        opacity: 1;
-        max-height: 100%;
-        padding: 1rem 2rem;
-        visibility: visible;
-        backface-visibility: hidden;
+        font-size: 1.6rem;
       }
 
       .accordion.active .accordion--header-text {
-        color: #4f79c9; /* Change color when parent is active */
+        color: #4f79c9; /* Change color when active */
       }
 
       /* Icon-styles */
@@ -60,15 +52,16 @@
       }
 
       .accordion.active .arrow-icon {
-        color: #4f79c9; /* Change icon color when parent is active */
-        transform: rotate(180deg); /* Rotate icon when parent is active */
+        color: #4f79c9; /* Change icon color when active */
+        transform: rotate(180deg); /* Rotate icon when active */
+        transition: all 0.3s ease-in-out;
       }
 
       /* Layout */
       .container {
         width: 95%;
         margin: 2rem auto;
-        border: 1px solid rgb(27, 27, 27, 0.2);
+        border: 1px solid rgba(27, 27, 27, 0.2);
         border-radius: 0.5rem;
       }
 
@@ -81,22 +74,26 @@
       }
 
       .accordion--body {
-        max-height: 0;
+        height: 0;
         opacity: 0;
         visibility: hidden;
-        transform: scaleY(100%);
-        padding: 0 2rem;
+        padding: 0rem 2rem;
         transition: all 0.3s ease-in-out;
-        transform-origin: top;
-        backface-visibility: hidden;
+      }
+
+      .accordion.active .accordion--body {
+        height: 100%;
+        opacity: 1;
+        padding: 0rem 2rem;
+        visibility: visible;
       }
 
       .accordion:not(:last-child) {
-        border-bottom: 1px solid rgb(27, 27, 27, 0.2);
+        border-bottom: 1px solid rgba(27, 27, 27, 0.2);
       }
 
       .accordion--body {
-        border-top: 1px solid rgb(27, 27, 27, 0.2);
+        border-top: 1px solid rgba(27, 27, 27, 0.2);
       }
 
       @media only screen and (max-width: 50em) {
@@ -177,7 +174,14 @@
 
       accordionItems.forEach((accordion) => {
         const header = accordion.querySelector(".accordion--header");
+        const body = accordion.querySelector(".accordion--body");
+
         header.addEventListener("click", () => {
+          if (accordion.classList.contains("active")) {
+            body.style.maxHeight = 0;
+          } else {
+            body.style.maxHeight = `${body.scrollHeight}px`;
+          }
           accordion.classList.toggle("active");
         });
       });
